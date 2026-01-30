@@ -1,0 +1,7 @@
+cultureInfo fr-FR
+	translations
+		model Model
+			table FACT_Sales
+				measure Deckungsbeitrag
+					caption: DB french
+

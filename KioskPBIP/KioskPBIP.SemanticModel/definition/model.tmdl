@@ -32,4 +32,5 @@ ref table DIM_Datum
 ref table FACT_Sales_agg
 
 ref cultureInfo en-US
+ref cultureInfo fr-FR
 
