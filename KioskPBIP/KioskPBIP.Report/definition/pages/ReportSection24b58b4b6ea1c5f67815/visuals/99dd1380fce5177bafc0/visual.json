@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "99dd1380fce5177bafc0",
+  "position": {
+    "x": 964.57142857142856,
+    "y": 0,
+    "z": 3000,
+    "height": 128,
+    "width": 315.42857142857144,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_Produkt"
+                        }
+                      },
+                      "Property": "Produktname"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(DIM_Produkt.Produktname)"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

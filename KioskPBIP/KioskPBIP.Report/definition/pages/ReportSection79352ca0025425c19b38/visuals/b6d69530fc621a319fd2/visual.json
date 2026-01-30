@@ -1,0 +1,76 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "b6d69530fc621a319fd2",
+  "position": {
+    "x": 421.60824742268039,
+    "y": 95.0103092783505,
+    "z": 3000,
+    "height": 116.78350515463917,
+    "width": 505.73195876288656,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_Datum"
+                    }
+                  },
+                  "Property": "Arbeitstag/Wochenende"
+                }
+              },
+              "queryRef": "DIM_Datum.Arbeitstag/Wochenende"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Sales"
+                    }
+                  },
+                  "Property": "Transaktionen"
+                }
+              },
+              "queryRef": "FACT_Sales.Transaktionen"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Sales"
+                    }
+                  },
+                  "Property": "Verkaufsmenge"
+                }
+              },
+              "queryRef": "FACT_Sales.Verkaufsmenge"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Sales"
+                    }
+                  },
+                  "Property": "Rabatt % (AVG)"
+                }
+              },
+              "queryRef": "FACT_Sales.Preisnachlass im Durchschnitt"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

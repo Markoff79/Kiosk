@@ -1,0 +1,12 @@
+relationship 330908a2-7392-4196-a037-cca504645836
+	fromColumn: FACT_Sales.Kundennummer
+	toColumn: DIM_Kunde.Kundennummer
+
+relationship 76f7cf4c-4301-4927-b7af-4c8ce0f5c478
+	fromColumn: FACT_Sales.Produktnummer
+	toColumn: DIM_Produkt.Produktnummer
+
+relationship d4f0871d-95bb-40ce-89c2-16faa7888f1b
+	fromColumn: FACT_Sales.Datum
+	toColumn: DIM_Datum.Datum
+

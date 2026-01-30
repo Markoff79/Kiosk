@@ -1,0 +1,222 @@
+table FACT_Sales
+	lineageTag: c8eac5f3-3982-4adc-97a7-522045f26e2d
+
+	measure Deckungsbeitrag = SUMX(FACT_Sales, FACT_Sales[DB_C] )
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Deckungsbeitrag
+		lineageTag: aa7a0938-ec2a-4d52-a0e6-ba9dc31cd752
+
+	measure 'Deckungsbeitrag alle Produkte' = CALCULATE([Deckungsbeitrag], ALL(DIM_Produkt))
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Deckungsbeitrag
+		lineageTag: 134f5330-5849-4a0b-b417-56365bcad6ed
+
+	measure 'Deckungsbeitrag PM' = CALCULATE([Deckungsbeitrag], DATEADD('DIM_Datum'[Datum], -1, MONTH))
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Deckungsbeitrag
+		lineageTag: 1aaf1ceb-a778-46df-9f1d-2b088190d912
+
+	measure 'Deckungsbeitrag vs alle Produkte %' = DIVIDE([Deckungsbeitrag], [Deckungsbeitrag alle Produkte])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Deckungsbeitrag
+		lineageTag: d99d586b-e34d-4434-aa69-4b8d6d52eb8d
+
+	measure 'Deckungsbeitrag vs PM %' = DIVIDE([Deckungsbeitrag vs PM abs], [Deckungsbeitrag PM])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Deckungsbeitrag
+		lineageTag: 93a89c1c-e0ab-491d-b56d-67d6c4839f36
+
+	measure 'Deckungsbeitrag vs PM abs' = [Deckungsbeitrag] - [Deckungsbeitrag PM]
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Deckungsbeitrag
+		lineageTag: d86422e9-46dd-451e-9da2-3ce426a2f27d
+
+	measure 'Deckungsbeitrag YTD' = CALCULATE([Deckungsbeitrag], DATESYTD('DIM_Datum'[Datum]))
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Deckungsbeitrag
+		lineageTag: 99021c36-9315-4918-b6c2-1fc2389c616b
+
+	measure 'Kunden mit Transaktionen' = DISTINCTCOUNT(FACT_Sales[Kundennummer])
+		formatString: 0
+		displayFolder: Kundenanzahl
+		lineageTag: 09df7805-1508-4f3a-816b-d45ca1f2f124
+
+	measure 'Rabatt % (AVG)' = AVERAGEX(FACT_Sales, FACT_Sales[Rabatt])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Rabatt
+		lineageTag: d557c619-98b6-4e23-9c50-b4de558e8237
+
+	measure 'Rabatt Betrag' = SUMX(FACT_Sales, FACT_Sales[Rabatt_C])
+		formatString: #,0.0\ "€";-#,0.0\ "€";#,0.0\ "€"
+		displayFolder: Rabatt
+		lineageTag: b3d2ed51-fd57-472b-a354-3b997abc0517
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	measure Transaktionen = COUNTROWS(FACT_Sales)
+		formatString: #,0
+		displayFolder: Transaktionen
+		lineageTag: 200556ec-a84a-4259-a668-b0771b7f4428
+
+	measure 'Transaktionen pro Kunde' = AVERAGEX(DIM_Kunde, [Transaktionen])
+		formatString: #,0
+		displayFolder: Transaktionen
+		lineageTag: 0fcf2d18-d409-4aaf-8291-01ca93703b9a
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Transaktionen pro Tag' = AVERAGEX('DIM_Datum', [Transaktionen])
+		formatString: #,0
+		displayFolder: Transaktionen
+		lineageTag: 55b4e8c8-cbf8-4a8c-91cb-c80cae598f37
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Umsatz = SUMX(FACT_Sales, FACT_Sales[Umsatz_C])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Umsatz
+		lineageTag: 48d825eb-8ba1-4308-bd74-92bf5f4888c0
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	measure 'Umsatz alle Produkte' = CALCULATE([Umsatz], ALL(DIM_Produkt))
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Umsatz
+		lineageTag: c5e225a5-3799-4db0-a38b-de7dd7ed2a2e
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	measure 'Umsatz vs alle Produkte %' = DIVIDE([Umsatz], [Umsatz alle Produkte])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Umsatz
+		lineageTag: 72584167-a19f-446e-adb3-1ea8b2a08f16
+
+	measure Umsatzrendite = DIVIDE([Deckungsbeitrag], [Umsatz])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Umsatz
+		lineageTag: 0a4ad10b-298d-4487-a990-0832aa330e7c
+
+	measure Verkaufsmenge = SUMX(FACT_Sales, FACT_Sales[Stückzahl])
+		formatString: #,0
+		displayFolder: Verkaufsmenge
+		lineageTag: 30b4b8fe-b5e3-4bc8-9899-e7536042065d
+
+	measure 'Verkaufsmenge pro Tag' = AVERAGEX('DIM_Datum', [Verkaufsmenge])
+		formatString: #,0
+		displayFolder: Verkaufsmenge
+		lineageTag: a2c3d2b6-c7ea-4019-8b36-6ee2cc60643b
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column Datum
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 0bc76f79-1477-40d1-87b9-5a4478429173
+		summarizeBy: none
+		sourceColumn: Datum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Produktnummer
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f30e9e6b-8979-47cb-a18f-16bda0066860
+		summarizeBy: none
+		sourceColumn: Produktnummer
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kundennummer
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0c9a1ac4-e8f9-4e8d-aa25-81b73055e1a6
+		summarizeBy: none
+		sourceColumn: Kundennummer
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Stückzahl
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 00c0639c-a820-4647-8d62-519abdddb7cf
+		summarizeBy: none
+		sourceColumn: Stückzahl
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Rabatt
+		dataType: double
+		isHidden
+		lineageTag: 6da0025c-0dcd-469a-8b9b-37d3a59081aa
+		summarizeBy: none
+		sourceColumn: Rabatt
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Umsatz_C = FACT_Sales[Stückzahl] * RELATED(DIM_Produkt[Produktpreis]) - [Stückzahl] * RELATED(DIM_Produkt[Produktpreis]) * FACT_Sales[Rabatt]
+		isHidden
+		lineageTag: 7764ea15-cdea-4ab9-bf46-fb33a469f67c
+		summarizeBy: none
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Rabatt_C = FACT_Sales[Stückzahl] * RELATED(DIM_Produkt[Produktpreis]) * FACT_Sales[Rabatt]
+		isHidden
+		lineageTag: 4850ba2b-3cd3-489c-8d33-9dc48043d6c3
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DB_C = FACT_Sales[Umsatz_C] - FACT_Sales[Stückzahl] * RELATED(DIM_Produkt[Produktkosten])
+		isHidden
+		lineageTag: a397f703-03bb-4fd1-921e-8c8317507965
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FACT_Sales-64a63092-0ee8-486b-9ae9-70d1387eeb29 = m
+		mode: import
+		queryGroup: Load
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\mnieling\Desktop\Kiosk\ExcelSources\Power BI Kiosk.xlsx"), null, true),
+				    FACT_Sales_Sheet = Source{[Item="FACT_Sales",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(FACT_Sales_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Datum", type date}, {"Produktnummer", Int64.Type}, {"Kundennummer", Int64.Type}, {"Stückzahl", Int64.Type}, {"Rabatt", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

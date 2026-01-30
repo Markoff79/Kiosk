@@ -1,0 +1,72 @@
+table DIM_Produkt
+	lineageTag: a3435934-3368-454b-8163-6584c2f5179f
+
+	column Produktnummer
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: 69ad62ca-af6e-4e91-b9e4-985f82b952ff
+		summarizeBy: none
+		sourceColumn: Produktnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Produktname
+		dataType: string
+		lineageTag: dae440c2-bdca-4f60-bc23-1d653ad7b28a
+		summarizeBy: none
+		sourceColumn: Produktname
+
+		annotation SummarizationSetBy = Automatic
+
+	column Produktpreis
+		dataType: double
+		lineageTag: 107b20fb-a6e0-44b2-928f-fcb0a7b3a770
+		summarizeBy: none
+		sourceColumn: Produktpreis
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Produktkosten
+		dataType: double
+		lineageTag: 8d40158c-3c7e-468e-9115-450e187b859c
+		summarizeBy: none
+		sourceColumn: Produktkosten
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Kategorienummer
+		dataType: int64
+		formatString: 0
+		lineageTag: 6714c247-6a65-4854-ae18-49f7d1e42bc2
+		summarizeBy: none
+		sourceColumn: Kategorienummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kategoriename
+		dataType: string
+		lineageTag: 1b0c478b-0a8d-4b15-a285-04ce513c9a01
+		summarizeBy: none
+		sourceColumn: Kategoriename
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Produkt-58e1c270-7117-4731-9061-98a221bf0752 = m
+		mode: import
+		queryGroup: Load
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\mnieling\Desktop\Kiosk\ExcelSources\Power BI Kiosk.xlsx"), null, true),
+				    DIM_Produkt_Sheet = Source{[Item="DIM_Produkt",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(DIM_Produkt_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Produktnummer", Int64.Type}, {"Produktname", type text}, {"Produktpreis", type number}, {"Produktkosten", type number}, {"Kategorienummer", Int64.Type}, {"Kategoriename", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

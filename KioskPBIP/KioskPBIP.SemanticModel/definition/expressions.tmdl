@@ -1,0 +1,31 @@
+expression FACT_Sales_Help =
+		let
+		    Source = Excel.Workbook(File.Contents("C:\Users\mnieling\Desktop\Kiosk\ExcelSources\Power BI Kiosk.xlsx"), null, true),
+		    FACT_Sales_Sheet = Source{[Item="FACT_Sales",Kind="Sheet"]}[Data],
+		    #"Promoted Headers" = Table.PromoteHeaders(FACT_Sales_Sheet, [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Datum", type date}, {"Produktnummer", Int64.Type}, {"Kundennummer", Int64.Type}, {"Stückzahl", Int64.Type}, {"Rabatt", type number}}),
+		    #"Grouped Rows" = Table.Group(#"Changed Type", {"Datum", "Produktnummer"}, {{"Rabatt", each List.Average([Datum]), type nullable date}, {"Stückzahl", each List.Sum([Stückzahl]), type nullable number}})
+		in
+		    #"Grouped Rows"
+	lineageTag: cdb3f9ec-a6ef-43f3-85f5-6825c92944cf
+	queryGroup: Help
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression DIM_Produkt_Help =
+		let
+		    Source = Excel.Workbook(File.Contents("C:\Users\mnieling\Desktop\Kiosk\ExcelSources\Power BI Kiosk.xlsx"), null, true),
+		    DIM_Produkt_Sheet = Source{[Item="DIM_Produkt",Kind="Sheet"]}[Data],
+		    #"Promoted Headers" = Table.PromoteHeaders(DIM_Produkt_Sheet, [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Produktnummer", Int64.Type}, {"Produktname", type text}, {"Produktpreis", type number}, {"Produktkosten", type number}, {"Kategorienummer", Int64.Type}, {"Kategoriename", type text}})
+		in
+		    #"Changed Type"
+	lineageTag: 99a3d6a0-0f4f-494a-9613-a64e00b09014
+	queryGroup: Help
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

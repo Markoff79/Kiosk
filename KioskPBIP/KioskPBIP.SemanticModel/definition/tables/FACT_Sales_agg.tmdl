@@ -1,0 +1,113 @@
+table FACT_Sales_agg
+	lineageTag: e7c21c4e-eb40-495d-98d5-5cd3042cbd1a
+
+	column Datum
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c92452eb-33a0-434f-b23a-da63be579a9e
+		summarizeBy: none
+		sourceColumn: Datum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Produktnummer
+		dataType: int64
+		formatString: 0
+		lineageTag: c613d6ad-e202-49fb-aaa0-6be8db973a82
+		summarizeBy: sum
+		sourceColumn: Produktnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rabatt
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0d90abfc-48bc-45a8-88b1-e47afba8259d
+		summarizeBy: none
+		sourceColumn: Rabatt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Stückzahl
+		dataType: double
+		lineageTag: ef8a4709-53fa-4eeb-8886-1e7b08d068e7
+		summarizeBy: sum
+		sourceColumn: Stückzahl
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'DIM_Produkt_Help.Produktnummer'
+		dataType: int64
+		formatString: 0
+		lineageTag: a2bd839b-8340-4f8e-ad0f-7a500d072496
+		summarizeBy: sum
+		sourceColumn: DIM_Produkt_Help.Produktnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DIM_Produkt_Help.Produktname'
+		dataType: string
+		lineageTag: 20cdf91b-0dff-4b51-8d73-2550525d660d
+		summarizeBy: none
+		sourceColumn: DIM_Produkt_Help.Produktname
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DIM_Produkt_Help.Produktpreis'
+		dataType: double
+		lineageTag: bec0c3b0-e725-48a0-a3de-dcee72ae2421
+		summarizeBy: sum
+		sourceColumn: DIM_Produkt_Help.Produktpreis
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'DIM_Produkt_Help.Produktkosten'
+		dataType: double
+		lineageTag: 3539da6c-4431-48ec-b5e8-75b800670525
+		summarizeBy: sum
+		sourceColumn: DIM_Produkt_Help.Produktkosten
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'DIM_Produkt_Help.Kategorienummer'
+		dataType: int64
+		formatString: 0
+		lineageTag: 56678403-d205-4f7b-88b1-cc75003a591d
+		summarizeBy: sum
+		sourceColumn: DIM_Produkt_Help.Kategorienummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DIM_Produkt_Help.Kategoriename'
+		dataType: string
+		lineageTag: d7c8dff1-0898-4d80-985c-3f64bae1a8cf
+		summarizeBy: none
+		sourceColumn: DIM_Produkt_Help.Kategoriename
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FACT_Sales_agg = m
+		mode: import
+		queryGroup: Help
+		source =
+				let
+				    Source = FACT_Sales_Help,
+				    #"Merged Queries" = Table.NestedJoin(Source, {"Produktnummer"}, DIM_Produkt_Help, {"Produktnummer"}, "DIM_Produkt_Help", JoinKind.LeftOuter),
+				    #"Expanded DIM_Produkt_Help" = Table.ExpandTableColumn(#"Merged Queries", "DIM_Produkt_Help", {"Produktnummer", "Produktname", "Produktpreis", "Produktkosten", "Kategorienummer", "Kategoriename"}, {"DIM_Produkt_Help.Produktnummer", "DIM_Produkt_Help.Produktname", "DIM_Produkt_Help.Produktpreis", "DIM_Produkt_Help.Produktkosten", "DIM_Produkt_Help.Kategorienummer", "DIM_Produkt_Help.Kategoriename"})
+				in
+				    #"Expanded DIM_Produkt_Help"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

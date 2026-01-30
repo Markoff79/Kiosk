@@ -1,0 +1,35 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: de-DE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Help
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Load
+
+	annotation PBI_QueryGroupOrder = 1
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["DIM_Kunde","DIM_Produkt","FACT_Sales","DIM_Datum","FACT_Sales_Help","DIM_Produkt_Help","FACT_Sales_agg"]
+
+annotation __TEdtr = 1
+
+annotation __BNorm = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DIM_Kunde
+ref table DIM_Produkt
+ref table FACT_Sales
+ref table DIM_Datum
+ref table FACT_Sales_agg
+
+ref cultureInfo en-US
+

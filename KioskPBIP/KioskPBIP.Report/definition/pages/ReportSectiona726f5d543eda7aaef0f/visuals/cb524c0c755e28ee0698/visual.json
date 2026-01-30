@@ -1,0 +1,62 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "cb524c0c755e28ee0698",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "height": 110.63625450180071,
+    "width": 1243.7935174069626,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Kartendarstellungen sind immer mit Vorsicht zu genießen... (z.B. hier \"Albersloh\" kaum zu sehen trotz höherem DB als \"Münster\"!!!)",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "12pt",
+                      "color": "#ff0314"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Meiner Meinung nach nur sinnvoll, wenn es um so etwas wie Einzugsanalyse, Planung neuer Standort, etc. geht.",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "12pt",
+                      "color": "#ff0314"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Ansonsten überflüssig!!",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "12pt",
+                      "color": "#ff0314"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

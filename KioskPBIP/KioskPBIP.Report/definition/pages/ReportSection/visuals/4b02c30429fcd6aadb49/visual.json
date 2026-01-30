@@ -1,0 +1,173 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "4b02c30429fcd6aadb49",
+  "position": {
+    "x": 498.46153846153845,
+    "y": 30.76923076923077,
+    "z": 3000,
+    "height": 674.46153846153845,
+    "width": 761.84615384615381,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_Datum"
+                    }
+                  },
+                  "Property": "Jahr"
+                }
+              },
+              "queryRef": "DIM_Datum.Jahr",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_Datum"
+                    }
+                  },
+                  "Property": "Monat Name"
+                }
+              },
+              "queryRef": "DIM_Datum.Monat Name",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Sales"
+                    }
+                  },
+                  "Property": "Transaktionen"
+                }
+              },
+              "queryRef": "FACT_Sales.Anzahl Transaktionen"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Sales"
+                    }
+                  },
+                  "Property": "Transaktionen pro Tag"
+                }
+              },
+              "queryRef": "FACT_Sales.Transaktionen pro Tag"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Sales"
+                    }
+                  },
+                  "Property": "Verkaufsmenge"
+                }
+              },
+              "queryRef": "FACT_Sales.Verkaufsmenge"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Sales"
+                    }
+                  },
+                  "Property": "Verkaufsmenge pro Tag"
+                }
+              },
+              "queryRef": "FACT_Sales.Verkaufsmenge pro Tag"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_Datum"
+                  }
+                },
+                "Property": "Jahr"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_Datum"
+                  }
+                },
+                "Property": "Monat Name"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "DIM_Datum.Jahr"
+            ],
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_Datum"
+                    }
+                  },
+                  "Property": "Jahr"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "DIM_Datum.Monat Name"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "drillFilterOtherVisuals": true
+  }
+}

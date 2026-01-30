@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "7bcda955525dfc3f70a0",
+  "position": {
+    "x": 850.72215422276622,
+    "y": 0,
+    "z": 2000,
+    "height": 59.534883720930232,
+    "width": 289.84088127294979,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Klick mich:",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "16px",
+                      "color": "#fd625e"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "(Filter vs. Highlighten)",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "16px",
+                      "color": "#fd625e"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

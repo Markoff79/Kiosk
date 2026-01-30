@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "66e40fc587faab46da01",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "height": 60.464371497197753,
+    "width": 364.83586869495593,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Ruhig mal irgendwo hinklicken...",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "16px",
+                      "color": "#fd625e"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Auf die Kreisdiagramme oder in die Tabelle....",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "16px",
+                      "color": "#fd625e"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

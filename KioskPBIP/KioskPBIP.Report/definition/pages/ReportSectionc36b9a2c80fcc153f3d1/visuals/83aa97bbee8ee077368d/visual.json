@@ -1,0 +1,86 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "83aa97bbee8ee077368d",
+  "position": {
+    "x": 0,
+    "y": 360.24742268041234,
+    "z": 3000,
+    "height": 360.24742268041234,
+    "width": 816.49484536082468,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "Aquarium1442671919391",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_Produkt"
+                    }
+                  },
+                  "Property": "Produktname"
+                }
+              },
+              "queryRef": "DIM_Produkt.Produktname"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Sales"
+                    }
+                  },
+                  "Property": "Deckungsbeitrag"
+                }
+              },
+              "queryRef": "FACT_Sales.Deckungsbeitrag"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_Produkt"
+                  }
+                },
+                "Property": "Produktname"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "series": [
+        {
+          "properties": {
+            "series1type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'sharkie'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "DIM_Kunde",
+          "size": {
+            "height": 240,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 825,
+            "y": 0
+          },
+          "nodeIndex": "DIM_Produkt",
+          "size": {
+            "height": 250,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 419.9,
+            "y": 0
+          },
+          "nodeIndex": "FACT_Sales",
+          "size": {
+            "height": 262,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 412.20000000000005,
+            "y": 379
+          },
+          "nodeIndex": "DIM_Datum",
+          "size": {
+            "height": 328,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 795.17725265480624,
+            "y": 439.86017046884854
+          },
+          "nodeIndex": "FACT_Sales_agg",
+          "nodeLineageTag": "e7c21c4e-eb40-495d-98d5-5cd3042cbd1a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 50.346892102823141,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

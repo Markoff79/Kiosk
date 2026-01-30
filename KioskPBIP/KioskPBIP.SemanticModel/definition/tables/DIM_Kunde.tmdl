@@ -1,0 +1,88 @@
+table DIM_Kunde
+	lineageTag: e4cf66b9-b72f-49fb-bb7b-b8ed65328a02
+
+	measure _TooltipName = MAXX(DIM_Kunde, DIM_Kunde[Name])
+		lineageTag: 5e885ebf-7db0-41b0-98b5-1a07036661f9
+
+	column Kundennummer
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: 0dad51b8-953a-4816-b585-16abfaead632
+		summarizeBy: none
+		sourceColumn: Kundennummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 279ceee4-a1f4-4649-a591-f1db08ab7e7e
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Geburtsdatum
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ddb38fb2-0d2a-4c0e-947e-4109ed758f36
+		summarizeBy: none
+		sourceColumn: Geburtsdatum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Ort
+		dataType: string
+		lineageTag: b131dcd7-cb01-4530-80d7-ecba6d771bc9
+		summarizeBy: none
+		sourceColumn: Ort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alter = DATEDIFF(DIM_Kunde[Geburtsdatum], TODAY(), YEAR)
+		formatString: 0
+		lineageTag: 81db88b1-6dca-420b-a595-002c4f21afb5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Geschlecht = IF(DIM_Kunde[Name] IN {"Ivonne", "Anna"}, "weiblich", "männlich")
+		lineageTag: 15f7b730-b801-4502-92a6-cfccd7a7ef59
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 0d692812-2571-48b9-a9b2-37675f9438e3
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column URL
+		dataType: string
+		lineageTag: 12d21589-f874-4e7e-ba2d-6f99f6f8452c
+		summarizeBy: none
+		sourceColumn: URL
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Kunde-b9c0411c-185f-4627-bf84-5c14573e6237 = m
+		mode: import
+		queryGroup: Load
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\mnieling\Desktop\Kiosk\ExcelSources\Power BI Kiosk.xlsx"), null, true),
+				    DIM_Kunde_Sheet = Source{[Item="DIM_Kunde",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(DIM_Kunde_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Kundennummer", Int64.Type}, {"Name", type text}, {"Geburtsdatum", type date}, {"Ort", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,122 @@
+table DIM_Datum
+	lineageTag: 8aa493d0-878c-46f9-98f2-43b1781c0bef
+	dataCategory: Time
+
+	column Datum
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: 8259daa7-f1c9-4931-99d8-ed8b86dd7733
+		summarizeBy: none
+		sourceColumn: Datum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Jahr
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e3d216a-3c4a-4e1a-a50e-02045929b3eb
+		summarizeBy: none
+		sourceColumn: Jahr
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Monat Nr'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e26c1b9-88db-48c9-852e-f21587dd58b4
+		summarizeBy: none
+		sourceColumn: Monat Nr
+
+		annotation SummarizationSetBy = Automatic
+
+	column Monat
+		dataType: int64
+		formatString: 0
+		lineageTag: eeb180cf-8c67-4259-b984-ab57c7cd0b57
+		summarizeBy: none
+		sourceColumn: Monat
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Monat Name'
+		dataType: string
+		lineageTag: 4ae567b4-04d2-4449-8083-86394b7ad5f6
+		summarizeBy: none
+		sourceColumn: Monat Name
+		sortByColumn: 'Monat Nr'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Jahr-Monat
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 61fee23f-1cf8-47ce-b7ff-cef4ef9a155d
+		summarizeBy: none
+		sourceColumn: Jahr-Monat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Wochentag
+		dataType: string
+		lineageTag: c3cfd923-c737-43c7-8d61-2ad94997aaee
+		summarizeBy: none
+		sourceColumn: Wochentag
+		sortByColumn: 'Wochentag Nr'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Wochentag Nr'
+		dataType: int64
+		formatString: 0
+		lineageTag: b0a2df26-9d7e-4d56-9083-8c7e740625be
+		summarizeBy: none
+		sourceColumn: Wochentag Nr
+
+		annotation SummarizationSetBy = Automatic
+
+	column Arbeitstag/Wochenende = IF(DIM_Datum[Wochentag Nr] IN {6, 7}, "Wochenende", "Arbeitstag")
+		lineageTag: 28b9f073-b235-460f-8f85-d61a2f828486
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Datumshierarchie
+		lineageTag: d7a918bf-e6b1-4538-9d8b-0e03138aade2
+
+		level Jahr
+			lineageTag: 023db339-70cc-4fda-bb3b-847c8f023116
+			column: Jahr
+
+		level 'Monat Name'
+			lineageTag: ad09a155-5cd9-479e-b454-4dd54d4a944f
+			column: 'Monat Name'
+
+		level Datum
+			lineageTag: 4ee11951-7766-47d8-a007-27541fa8fe0b
+			column: Datum
+
+	partition DIM_Datum-280958e1-67c4-4ce8-b7c0-88c54c0c58e7 = m
+		mode: import
+		queryGroup: Load
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\mnieling\Desktop\Kiosk\ExcelSources\Datum.xlsx"), null, true),
+				    Datum_Sheet = Source{[Item="Datum",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Datum_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Datum", type date}, {"Jahr", Int64.Type}, {"Monat Nr", Int64.Type}, {"Monat", Int64.Type}, {"Monat Name", type text}, {"Jahr-Monat", type date}, {"Wochentag", type text}, {"Wochentag Nr", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
