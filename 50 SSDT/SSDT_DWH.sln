@@ -1,0 +1,26 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11426.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DWH", "SSDT_DWH\DWH.sqlproj", "{E4264AAA-35DA-476C-86E3-6359F4463EFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		aaa|Any CPU = aaa|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4264AAA-35DA-476C-86E3-6359F4463EFC}.aaa|Any CPU.ActiveCfg = aaa|Any CPU
+		{E4264AAA-35DA-476C-86E3-6359F4463EFC}.aaa|Any CPU.Build.0 = aaa|Any CPU
+		{E4264AAA-35DA-476C-86E3-6359F4463EFC}.aaa|Any CPU.Deploy.0 = aaa|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15889A36-8790-4029-B260-816C95F64D51}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+EndGlobal

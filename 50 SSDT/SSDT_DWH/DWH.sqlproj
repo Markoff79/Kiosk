@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>DWH</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{e4264aaa-35da-476c-86e3-6359f4463efc}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath />
+    <RootNamespace>DWH</RootNamespace>
+    <AssemblyName>DWH</AssemblyName>
+    <ModelCollation>1033,CS</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Latin1_General_CS_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <Recovery>SIMPLE</Recovery>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <SqlTargetName>etl_framework</SqlTargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'On Premises|AnyCPU' ">
+    <OutputPath>bin\On Premises\</OutputPath>
+    <SuppressTSqlWarnings>70588</SuppressTSqlWarnings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'SQL Database|AnyCPU' ">
+    <OutputPath>bin\SQL Database\</OutputPath>
+    <SuppressTSqlWarnings>70588</SuppressTSqlWarnings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Managed Instance|AnyCPU' ">
+    <OutputPath>bin\Managed Instance\</OutputPath>
+    <SuppressTSqlWarnings>70588</SuppressTSqlWarnings>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'aaa|AnyCPU' ">
+    <OutputPath>bin\aaa\</OutputPath>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="DAL_SAP" />
+    <Folder Include="DAL_SAP\Tables\" />
+    <Folder Include="DIL\" />
+    <Folder Include="DIL\Tables\" />
+    <Folder Include="INTERNAL_ETL\" />
+    <Folder Include="INTERNAL_ETL\Functions\" />
+    <Folder Include="INTERNAL_ETL\Stored Procedures\" />
+    <Folder Include="INTERNAL_ETL\Tables\" />
+    <Folder Include="INTERNAL_LOOKUP\" />
+    <Folder Include="INTERNAL_LOOKUP\Functions\" />
+    <Folder Include="INTERNAL_LOOKUP\Views\" />
+    <Folder Include="Properties" />
+    <Folder Include="Security\" />
+    <Folder Include="Storage\" />
+    <Folder Include="UTIL" />
+    <Folder Include="UTIL\Functions" />
+    <Folder Include="UTIL\Stored Procedures" />
+    <Folder Include="DPL" />
+    <Folder Include="DPL\Tables" />
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\150\SqlSchemas\msdb.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\150\SqlSchemas\msdb.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>msdb</DatabaseVariableLiteralValue>
+    </ArtifactReference>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\150\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\150\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="DataExporter">
+      <DefaultValue>yes</DefaultValue>
+      <Value>$(SqlCmdVar__6)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="email_domain">
+      <DefaultValue>novbofh.de</DefaultValue>
+      <Value>$(SqlCmdVar__3)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="errorlog_file">
+      <DefaultValue>E:\Microsoft SQL Server\MSSQL15.BIDISQL01DEV\MSSQL\Log\SQLAGENT.OUT</DefaultValue>
+      <Value>$(SqlCmdVar__5)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="mailserver_name">
+      <DefaultValue>Exchange01.novbofh.de</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="mail_profile_name">
+      <DefaultValue>noventum_dbmail_profile</DefaultValue>
+      <Value>$(SqlCmdVar__4)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="operator_email_address_admin">
+      <DefaultValue>bidi-sql@novbofh.de</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="SQLAgent_service_account">
+      <DefaultValue>BIDI\svc-sqlagent-adv</DefaultValue>
+      <Value>$(SqlCmdVar__8)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="SSAS_service_account">
+      <DefaultValue>BIDI\svc-ssas-dev</DefaultValue>
+      <Value>$(SqlCmdVar__7)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="SSISDB">
+      <DefaultValue>SSISDB</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="SSISDB_SERVER">
+      <DefaultValue>BIDI-SQL-ADV01.bidi.local\BIDISQLADV01</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+  <Target Name="BeforeBuild">
+    <Copy Condition=" '$(Configuration)|$(Platform)' == 'On Premises|AnyCPU' " SourceFiles="01 Deployment Scripts\Pre Deployment\PreDeployment.OnPremises.sql" DestinationFiles="01 Deployment Scripts\PreDeployment.ActualPlatform.sql" />
+    <Copy Condition=" '$(Configuration)|$(Platform)' == 'SQL Database|AnyCPU' " SourceFiles="01 Deployment Scripts\Pre Deployment\PreDeployment.SQLDatabase.sql" DestinationFiles="01 Deployment Scripts\PreDeployment.ActualPlatform.sql" />
+    <Copy Condition=" '$(Configuration)|$(Platform)' == 'On Premises|AnyCPU' " SourceFiles="01 Deployment Scripts\Post Deployment\PostDeployment.OnPremises.sql" DestinationFiles="01 Deployment Scripts\PostDeployment.ActualPlatform.sql" />
+    <Copy Condition=" '$(Configuration)|$(Platform)' == 'SQL Database|AnyCPU' " SourceFiles="01 Deployment Scripts\Post Deployment\PostDeployment.SQLDatabase.sql" DestinationFiles="01 Deployment Scripts\PostDeployment.ActualPlatform.sql" />
+  </Target>
+  <Target Name="AfterBuild">
+    <Delete Files="01 Deployment Scripts\PreDeployment.ActualPlatform.sql" />
+    <Delete Files="01 Deployment Scripts\PostDeployment.ActualPlatform.sql" />
+  </Target>
+  <ItemGroup>
+    <Build Include="DAL_SAP\Tables\md_0GL_ACCOUNT_ATTR.sql" />
+    <Build Include="DAL_SAP\Tables\md_0GL_ACCOUNT_T011_HIER_INT.sql" />
+    <Build Include="DAL_SAP\Tables\md_0GL_ACCOUNT_TEXT.sql" />
+    <Build Include="DAL_SAP\Tables\td_0FI_AP_4.sql" />
+    <Build Include="DAL_SAP\Tables\td_0FI_AP_4_DELTA.sql" />
+    <Build Include="DAL_SAP\Tables\td_0FI_SO_3.sql" />
+    <Build Include="DIL\Tables\md_GLAccount.sql" />
+    <Build Include="DIL\Tables\md_GLAccount_HIST.sql" />
+    <Build Include="DIL\Tables\md_GLAccount_Hierarchy_INT.sql" />
+    <Build Include="DIL\Tables\td_AccountsPayableLineItem.sql" />
+    <Build Include="INTERNAL_ETL\Functions\DIL_md_GLAccount.sql" />
+    <Build Include="INTERNAL_ETL\Functions\DIL_md_GLAccount_HIST.sql" />
+    <Build Include="INTERNAL_ETL\Functions\DIL_md_GLAccount_Hierarchy_INT.sql" />
+    <Build Include="INTERNAL_ETL\Functions\DIL_td_AccountsPayableLineItem.sql" />
+    <Build Include="INTERNAL_ETL\Stored Procedures\load_DIL_md_GLAccount.sql" />
+    <Build Include="INTERNAL_ETL\Stored Procedures\load_DIL_md_GLAccount_HIST.sql" />
+    <Build Include="INTERNAL_ETL\Stored Procedures\load_DIL_md_GLAccount_Hierarchy_INT.sql" />
+    <Build Include="INTERNAL_ETL\Stored Procedures\load_DIL_td_AccountsPayableLineItem.sql" />
+    <Build Include="INTERNAL_ETL\Tables\dependency.sql" />
+    <Build Include="INTERNAL_ETL\Tables\dependencyHistory.sql" />
+    <Build Include="INTERNAL_ETL\Tables\parameter_value.sql" />
+    <Build Include="INTERNAL_ETL\Tables\task.sql" />
+    <Build Include="INTERNAL_ETL\Tables\taskHistory.sql" />
+    <Build Include="INTERNAL_LOOKUP\Functions\getKey_DateTime7_Max.sql" />
+    <Build Include="INTERNAL_LOOKUP\Functions\getKey_DateTime7_Min.sql" />
+    <Build Include="INTERNAL_LOOKUP\Functions\getKey_Date_Max.sql" />
+    <Build Include="INTERNAL_LOOKUP\Functions\getKey_Date_Min.sql" />
+    <Build Include="INTERNAL_LOOKUP\Functions\getKey_Exception_Superfluous.sql" />
+    <Build Include="INTERNAL_LOOKUP\Functions\getKey_Exception_Volume.sql" />
+    <Build Include="INTERNAL_LOOKUP\Functions\getKey_Hierarchy_NodeType_Leaf.sql" />
+    <Build Include="INTERNAL_LOOKUP\Functions\getKey_Hierarchy_NodeType_Node.sql" />
+    <Build Include="INTERNAL_LOOKUP\Functions\getKey_Hierarchy_SAPNodeIdentifier.sql" />
+    <Build Include="INTERNAL_LOOKUP\Views\DAL_SAP_md_0GL_ACCOUNT_T011_HIER_INT.sql" />
+    <Build Include="INTERNAL_LOOKUP\Views\DAL_SAP_md_0GL_ACCOUNT_TEXT.sql" />
+    <Build Include="INTERNAL_LOOKUP\Views\DAL_md_HierarchyBaseObject.sql" />
+    <Build Include="INTERNAL_LOOKUP\Views\DIL_md_GLAccount.sql" />
+    <Build Include="INTERNAL_LOOKUP\Views\DIL_md_GLAccountHierarchy.sql" />
+    <Build Include="INTERNAL_LOOKUP\Views\DIL_md_HierarchyInfoObject.sql" />
+    <Build Include="INTERNAL_LOOKUP\Views\DIL_td_AccountsPayableLineItem.sql" />
+    <Build Include="Security\DAL_SAP.sql" />
+    <Build Include="Security\DIL.sql" />
+    <Build Include="Security\INTERNAL_ETL.sql" />
+    <Build Include="Security\INTERNAL_LOOKUP.sql" />
+    <Build Include="Security\INTERNAL_MERGE.sql" />
+    <Build Include="Security\UTIL.sql" />
+    <Build Include="UTIL\Functions\concatDescAndDesc.sql" />
+    <Build Include="UTIL\Functions\concatKeyAndDesc.sql" />
+    <Build Include="UTIL\Functions\getCapitalText.sql" />
+    <Build Include="UTIL\Functions\getDateFromdayTimeID.sql" />
+    <Build Include="UTIL\Functions\getDateFrommonthTimeID.sql" />
+    <Build Include="UTIL\Functions\getDateUltimo.sql" />
+    <Build Include="UTIL\Functions\getDayTimeIDFromDate.sql" />
+    <Build Include="UTIL\Functions\getDayTimeIDFromYear.sql" />
+    <Build Include="UTIL\Functions\getEasterSunday.sql" />
+    <Build Include="UTIL\Functions\getEndOfDayDateTime7.sql" />
+    <Build Include="UTIL\Functions\getFiscalYearPeriodMapping.sql" />
+    <Build Include="UTIL\Functions\getFiscalYearPeriods.sql" />
+    <Build Include="UTIL\Functions\getGermanHolidayName.sql" />
+    <Build Include="UTIL\Functions\getGermanHolidayNameFederalState.sql" />
+    <Build Include="UTIL\Functions\getGreaterDate.sql" />
+    <Build Include="UTIL\Functions\getGreaterDateTime7.sql" />
+    <Build Include="UTIL\Functions\getIsDeleted.sql" />
+    <Build Include="UTIL\Functions\getIsRowCurrent_Date.sql" />
+    <Build Include="UTIL\Functions\getIsRowCurrent_DateTime7.sql" />
+    <Build Include="UTIL\Functions\getIsRowLatest.sql" />
+    <Build Include="UTIL\Functions\getLowerDate.sql" />
+    <Build Include="UTIL\Functions\getLowerDateTime7.sql" />
+    <Build Include="UTIL\Functions\getMonthTimeIDFromDate.sql" />
+    <Build Include="UTIL\Functions\getRangeOfNumbers.sql" />
+    <Build Include="UTIL\Functions\getSSASDate.sql" />
+    <Build Include="UTIL\Functions\getSSASDateTime0.sql" />
+    <Build Include="UTIL\Functions\getSSASDateTime2_0_WithoutMilliseconds.sql" />
+    <Build Include="UTIL\Functions\getSSASDateTime7.sql" />
+    <Build Include="UTIL\Functions\getStringFromDate.sql" />
+    <Build Include="UTIL\Functions\getTextWithoutBrackets.sql" />
+    <Build Include="UTIL\Functions\get_hierarchy_base.sql" />
+    <Build Include="UTIL\Functions\get_hierarchy_flattened.sql" />
+    <Build Include="UTIL\Functions\get_string_from_numeric_sort.sql" />
+    <Build Include="UTIL\Functions\is_main_database.sql" />
+    <Build Include="UTIL\Functions\parseNumber.sql" />
+    <Build Include="UTIL\Functions\splitStringsXML.sql" />
+    <Build Include="UTIL\Stored Procedures\sp_whoisactive.sql">
+      <SuppressTSqlWarnings>71502</SuppressTSqlWarnings>
+    </Build>
+    <Build Include="Security\DPL.sql" />
+    <Build Include="DPL\Tables\dim_Time_Day.sql" />
+    <Build Include="DPL\Tables\dim_Time_FiscalQuarter.sql" />
+    <Build Include="DPL\Tables\dim_Time_FiscalTertial.sql" />
+    <Build Include="DPL\Tables\dim_Time_FiscalYear.sql" />
+    <Build Include="DPL\Tables\dim_Time_IsoWeek.sql" />
+    <Build Include="DPL\Tables\dim_Time_Month.sql" />
+    <Build Include="DPL\Tables\dim_Time_Quarter.sql" />
+    <Build Include="DPL\Tables\dim_Time_Tertial.sql" />
+    <Build Include="DPL\Tables\dim_Time_Week.sql" />
+    <Build Include="DPL\Tables\dim_Time_Year.sql" />
+  </ItemGroup>
+</Project>
